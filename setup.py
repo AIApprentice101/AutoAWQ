@@ -7,10 +7,12 @@ from torch.utils.cpp_extension import CUDAExtension
 AUTOAWQ_VERSION = "0.2.6"
 PYPI_BUILD = os.getenv("PYPI_BUILD", "0") == "1"
 INSTALL_KERNELS = os.getenv("INSTALL_KERNELS", "0") == "1"
-IS_CPU_ONLY = not torch.backends.mps.is_available() and not torch.cuda.is_available()
+# IS_CPU_ONLY = not torch.backends.mps.is_available() and not torch.cuda.is_available()
+IS_CPU_ONLY = False
 TORCH_VERSION = str(os.getenv("TORCH_VERSION", None) or torch.__version__).split('+', maxsplit=1)[0]
 
-CUDA_VERSION = os.getenv("CUDA_VERSION", None) or torch.version.cuda
+# CUDA_VERSION = os.getenv("CUDA_VERSION", None) or torch.version.cuda
+CUDA_VERSION = os.getenv("CUDA_VERSION", "12.1") or torch.version.cuda
 if CUDA_VERSION:
     CUDA_VERSION = "".join(CUDA_VERSION.split("."))[:3]
 
